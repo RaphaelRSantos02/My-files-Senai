@@ -2,7 +2,7 @@ import random
 from os import system 
 from pick import pick
 from time import sleep
- # This is a project i made with my friend in Senai
+ # This is a project I did with my friend from Senai
 listaMega = []
 
 def generatePick(titulo, opcao):
