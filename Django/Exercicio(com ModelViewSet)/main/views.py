@@ -18,6 +18,7 @@ class EpisodeAPIView(ModelViewSet):
     serializer_class = EpisodeSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['name', 'episode'] #campos que podem ser filtrados filtrar
+
         
     
 class LocationAPIView(ModelViewSet):
@@ -25,4 +26,4 @@ class LocationAPIView(ModelViewSet):
     serializer_class = LocationSerializer
     filter_backends = [DjangoFilterBackend] #biblioteca para filtro
     filterset_fields = ['name','dimension'] #campos que podem ser filtrados filtrar
-    
+    permission_classes =(IsAuthenticated,)
