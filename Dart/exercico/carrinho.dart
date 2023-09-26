@@ -6,11 +6,13 @@ class carrinho{
 
   void adicionar(String mais ){
     itens.add(mais);
+    print(itens);
   }
 
-  }
+
   void remover(int menos){
-    itens.remove(menos);
+    itens.removeAt(menos);
+    print(itens);
     }
 
   void total(bool st){
@@ -26,6 +28,10 @@ class carrinho{
 
 void main(){
   carrinho meucarrinho = carrinho();
-  meucarrinho.adicionar(true);
+  meucarrinho.adicionar("Maça");
+  meucarrinho.adicionar("pera");
+  meucarrinho.total(true);
+  meucarrinho.remover(1);
+
 }
 
