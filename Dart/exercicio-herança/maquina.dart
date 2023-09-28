@@ -11,12 +11,13 @@ class maquina{
   void desligada(){
     print("maquina desligada");
   }
-  void rotacao(double RPM_novo)
+  void rotacao(double RPM_novo){
   print("A nova rotação por minuto agora é de $RPM_novo");
+  }
 }
 
 class furadeira extends maquina{
-  furadeira(String nome, double RPM, double consumo_energia): super(nome, RPM, consumo_energia);
+  furadeira(String nome,int Qtds_eixo, double RPM, double consumo_energia): super(nome, Qtds_eixo,RPM,consumo_energia);
   void ligar(){
     super.ligar();
   }
@@ -29,5 +30,9 @@ class furadeira extends maquina{
 }
 
 void main(){
+  furadeira Furadeira = furadeira("furadeira", 3, 100, 2.1);
+  Furadeira.ligar();
+  Furadeira.desligada();
+  Furadeira.rotacao(600);
 
 }
