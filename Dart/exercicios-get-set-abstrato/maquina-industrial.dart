@@ -1,12 +1,13 @@
+import 'dart:ffi';
 
-abstract class maquina{
+abstract class maquinaIndustrial{
   void nome();
   void potencia();
   void status(bool st);
   void ligar();
   void desligar();
 }
-class Prensa implements maquina{
+class Prensa implements maquinaIndustrial{
   double pressao;
   Prensa(this.pressao);
   void nome(){
@@ -31,7 +32,7 @@ class Prensa implements maquina{
     print("Pressione o botão vermelho");
   }
 }
-class Robo implements maquina {
+class Robo implements maquinaIndustrial {
   String solda;
   Robo(this.solda);
 
@@ -65,4 +66,36 @@ class Robo implements maquina {
   }
 }
 
+class Transportadora implements maquinaIndustrial{
+  Float velocidade;
+  Transportadora(this.velocidade);
+  @override
+  void nome(){
+    print("Transportadora");
+  }
+
+  @override
+  void potencia(){
+    print("a potencia de $nome() é de 20 ");
+  }
+  @override
+  void status(bool st){
+    if(st = true){
+      print("A maquina esta ligada");
+    }
+    else{
+      print("A maquina esta desligada");
+    }
+  }
+
+  @override
+  void ligar(){
+    print("Aperte o botão Rosa");
+  }
+  
+  @override 
+  void desligar(){
+    print("Aperte o botão branco");
+  }
+}
 
