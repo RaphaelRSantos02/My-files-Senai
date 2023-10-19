@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
           ),
           body: Column(
             children: [
-              Task(),
-              Task(),
-              Task(),
-              Task(),
+              Task("Aprender Flutter","https://storage.googleapis.com/cms-storage-bucket/70760bf1e88b184bb1bc.png"),
+              Task("Jogar video game", "https://storage.googleapis.com/cms-storage-bucket/70760bf1e88b184bb1bc.png"),
+              Task("Estudar","https://storage.googleapis.com/cms-storage-bucket/70760bf1e88b184bb1bc.png"),
+              Task("comprar comida","https://storage.googleapis.com/cms-storage-bucket/70760bf1e88b184bb1bc.png"),
             ],
           ),
           )
@@ -31,7 +31,9 @@ class MyApp extends StatelessWidget {
 
 
 class Task extends StatelessWidget {
-  const Task({super.key});
+  final String Tarefas;
+  final String img;
+  const Task(this.Tarefas,this.img,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +46,12 @@ class Task extends StatelessWidget {
             child: Row(
               mainAxisAlignment:  MainAxisAlignment.spaceBetween,
               children: [
-                Container(color: Colors.grey,height: 100, width: 80),
-                Text('Aprender Flutter', style: TextStyle(fontSize: 22),),
+                Container(color: Colors.grey,height: 100, width: 80,
+                child: Image.network(
+                  img,
+                  fit: BoxFit.fill,),
+                ),
+                Text(Tarefas, style: TextStyle(fontSize: 22),),
                 ElevatedButton(onPressed: (){print("Botão pressionado");}, 
                 child: Icon(Icons.arrow_drop_up))
               ],
