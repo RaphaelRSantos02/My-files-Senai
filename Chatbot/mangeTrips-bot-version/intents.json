@@ -1,0 +1,31 @@
+{
+    "intents": [
+        {
+            "tag": "cumprimento",
+            "patterns": [
+                "oii",
+                "ola",
+                "como vai?"
+            ],
+            "responses": [
+                "olá sou a assistente do mangeTrip, como posso ajudar?",
+                "olá, como posso ser util?"
+            ],
+            "required":"\n Ou se preferir digite alguma dessas opções: -listar viagem, -pagamentos, -minhas reservas"
+        },
+        {
+            "tag": "listar",
+            "patterns": [
+                "Listar viagem",
+                "Opções de viagens",
+                "Quais viagens disponiveis??"
+            ],
+            "responses": [
+                "Ok, aqui está algumas de opções",
+                "Certo, já vou te informar nossa oferta"
+            ],
+            "required":"\n Ou se preferir digite o destino",
+            "command": "LIST_TRIPS"
+        }
+    ]
+}
