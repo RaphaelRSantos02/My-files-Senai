@@ -18,7 +18,9 @@
             "patterns": [
                 "Listar viagem",
                 "Opções de viagens",
-                "Quais viagens disponiveis??"
+                "Quais viagens disponiveis??",
+                "viagem",
+                "opções"
             ],
             "responses": [
                 "Ok, aqui está algumas de opções",
@@ -26,6 +28,25 @@
             ],
             "required":"\n Ou se preferir digite o destino",
             "command": "LIST_TRIPS"
+        },
+        {
+            "tag": "Procurar",
+            "patterns": [
+                "Encontrar uma viagem",
+                "Quero procuar uma viagem",
+                "procuro viagem",
+                "encontre para mim uma viagem",
+                "procurar",
+                "encontrar",
+                "buscar",
+                "busque uma viagem"
+            ],
+            "responses": [
+                "Legal, para onde iremos então?",
+                "Entendido, me informe qual o destino desejado?",
+                "Certo, por favor, digite para onde deseja ir?"
+            ],
+            "command": "SEARCH_TRIP"
         }
     ]
 }

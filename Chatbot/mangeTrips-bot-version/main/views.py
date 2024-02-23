@@ -10,12 +10,13 @@ from datetime import timedelta, datetime
 from django_filters.rest_framework import DjangoFilterBackend
 from .customFilters import *
 from rest_framework import filters
-from django.db.models import Avg
+from django.db.models import Avg, Q
 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated, DjangoModelPermissionsOrAnonReadOnly
+
 from ai import train, chat
 from django.http import JsonResponse
-
+from django.core.exceptions import ObjectDoesNotExist
 
 def strToDate(strDate):
     return datetime.strptime(strDate, '%Y-%m-%d').date()
@@ -138,42 +139,73 @@ class AvailabilityView(CustomModelViewSet):
     ordering_fields = '__all__' 
     # permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)  
 
+def convertToMessage(data, attributeName):
+    index = 1
+    response = ' \n '
+    for dt in data:
+        response += str(index) + ' - ' + getattr(dt,attributeName, None) + '\n'
+    if not data.exists():
+        response = 'descupe, mas não consegui encontrar o que vc procura =/ vamos tentar de novo?'
+    return response
+    
+
 
 class ChatBotAPIView(APIView):
     def post(self, request):
         data = request.data
-        question = data.get('question')      
-        ConversationId = data.get("ConversationId")
-        userId = data.get("userId")
+        question = data.get('question')
+        conversationId = data.get('conversationId')
+        userId = data.get('userId')
         
-        userF = None
+        userFound = None
         try:
-            userF = User.object.get(pk=userId)
+            userFound = User.objects.get(pk=userId)
         except ObjectDoesNotExist:
-            return JsonResponse(status=500, data={'content': 'usuário não encontrado'})
-        
-        
-        conversationF = None
+            return JsonResponse(status=500,data={'content': 'Usuário não encontrado!'})
 
-        if ConversationId is None:
-            NewHistory = ConversationHistory(user=userF)
-            NewHistory.save()
-            conversationF = NewHistory
+        conversationFound = None
+
+        #nova conversa!
+        if conversationId is None:
+            newHistory = ConversationHistory(user=userFound)
+            newHistory.save()
+            conversationFound = newHistory
+        #contexto de uma conversa já existente (front enviou o conversationId)
         else:
             try:
-                conversationF = ConversationHistory.object.get(pk=ConversationId)
+                conversationFound = ConversationHistory.objects.get(pk=conversationId)
             except ObjectDoesNotExist:
-                return JsonResponse(status=500, data={'content': 'Conversa não encontrado'})
-            newQuestion = Conversation(type = "Q", message=question, history=conversationF)
-            newQuestion.save()
+                return JsonResponse(status=500,data={'content': 'Conversa não encontrada!'})
 
-                
+        #salva a pergunta no banco, linkando com o histórico
+        newQuestion = Conversation(type="Q",message=question,history=conversationFound)
+        newQuestion.save()
+        
+        #chama a I.A.
         answer = chat.get_response(question)
+        finalMessage = answer.message
 
-        newAnswer = Conversation(type="A", message=answer.message,history=conversationF)
+        newAnswer = None
+        if conversationFound.lastCommand == 'SEARCH_TRIP':
+            trip = Trip.objects.filter(Q(title__icontains=question) | Q(description__icontains=question) | Q(city__icontains=question))
+            finalMessage = convertToMessage(trip, 'title')
+            newAnswer = Conversation(type="A", message=finalMessage, history=conversationFound)
+
+        
+
+        elif answer.command == 'LIST_TRIPS':
+            trips = Trip.objects.all()
+            finalMessage += convertToMessage(trips,'title')
+        else: 
+            conversationFound.lastCommand = answer.command
+            conversationFound.save()
+            newAnswer = Conversation(type="A", message=finalMessage, history=conversationFound)
+
         newAnswer.save()
 
-        serializedAnswer = ConversationHistorySerializer(newAnswer, many=False)
+        newAnswer = Conversation(type="A",message= finalMessage if answer.additionalMessage is None else  finalMessage+ '\n' + answer.additionalMessage,history=conversationFound)
+        newAnswer.save()
+        
+        serializedAnswer = ConversationSerializer(newAnswer,many=False)
                
         return JsonResponse(status=201, data=serializedAnswer.data)
-
