@@ -19,8 +19,8 @@
         </section>
         <section class="login_panel">
             <div class="login_content flex_center">
+                <h1>LOGIN</h1>
                 <form class="login_form">
-                    <h1>LOGIN</h1>
                     <div class="input_container">
                         <CustomInput label="LOGIN" inputId="user_login"
                         v-model="credentials.username"
@@ -67,6 +67,7 @@
             color: var(--light-background-color);
             img{
                 margin: 0px 0px 25px 0px; 
+                align-items: center;
                 width: 65%;
                 height: 45%;
             }
@@ -75,32 +76,33 @@
 
         .login_panel{
             width: 100vw;
-            height: 100vh; 
+            height: 100vh;  
             background-color: var(--light-background-color);
 
             .login_content{
                 flex-direction: column;
                 width: 100%;
                 height: 80%;
-            }
-            h1{
-                width: 120px;
-                padding-top: 10px;
-                padding-bottom: 50px;
-                font-size: 36px;
-            }
-            .login_form{
-                width: 60%;
-                .input_container{
-                    margin-top: 30px;
+
+                h1{
+                    width: 120px;
+                    padding-top: 10px;
+                    padding-bottom: 50px;
+                    font-size: 36px;
                 }
-                .customButton{
-                    margin-top: 50px;
+                
+                .login_form{
+                    width: 60%;
+                    .input_container{
+                        margin-top: 30px;
+                    }
+                    .customButton{
+                        margin-top: 50px;
+                    }
                 }
             }
         }
     }
-
 
     @media screen and (min-width: 600px) {
         .login_main{
