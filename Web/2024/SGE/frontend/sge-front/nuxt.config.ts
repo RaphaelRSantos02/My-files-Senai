@@ -23,9 +23,9 @@ export default defineNuxtConfig({
         signInResponseTokenPointer: '',
         maxAgeInSeconds: 600,
       },
-      refreshToken: { signInResponseRefreshTokenPointer : '',
-      maxAgeInSeconds: 600, 
-    },
+      //refreshToken: { signInResponseRefreshTokenPointer : '',
+      //maxAgeInSeconds: 600, 
+    //},
       pages: {
         login: '/'
       }
