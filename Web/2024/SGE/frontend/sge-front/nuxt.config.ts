@@ -16,11 +16,11 @@ export default defineNuxtConfig({
         signIn: { path: '/api/auth/token/login', method: 'post'},
         signOut: { path: '/api/auth/token/logout', method: 'post' },
         signUp: { },
-        getSession: { path: '/api/auth/user', method: 'get' },
+        getSession: { path: '/api/auth/users', method: 'get' },
         //refresh: { }
       },
       token: {
-        signInResponseTokenPointer: '',
+        signInResponseTokenPointer: '/auth_token',
         maxAgeInSeconds: 600,
       },
       //refreshToken: { signInResponseRefreshTokenPointer : '',
