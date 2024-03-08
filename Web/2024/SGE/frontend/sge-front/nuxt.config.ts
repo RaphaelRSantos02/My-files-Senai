@@ -13,10 +13,10 @@ export default defineNuxtConfig({
     provider: {
       type: 'local',
       endpoints: {
-        signIn: { },
-        signOut: { },
+        signIn: { path: '/api/auth/token/login', method: 'post'},
+        signOut: { path: '/api/auth/token/logout', method: 'post' },
         signUp: { },
-        getSession: { },
+        getSession: { path: '/api/auth/user', method: 'get' },
         //refresh: { }
       },
       token: {
