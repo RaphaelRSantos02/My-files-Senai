@@ -90,7 +90,9 @@ class _IndustriaState extends State<Industria> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column( 
+      body:
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center, 
         children: [
           Center(
             child: Image.asset(widget.img, fit: BoxFit.fill,)
