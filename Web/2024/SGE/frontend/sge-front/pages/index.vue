@@ -1,8 +1,18 @@
 <script setup lang="ts">
+    const {signIn} = useAuth();
     const credentials = reactive({
         username: '',
         password: ''
     })
+    const submitLogin = async () => {
+        console.log("trying to login with credentials below: ", credentials);
+        try{
+            await signIn(credentials, {redirect: false} );
+            navigateTo('/home')
+        } catch(error){
+            console.log(error)
+        }
+    }
 </script>
 
 <template>
@@ -20,7 +30,7 @@
         <section class="login_panel">
             <div class="login_content flex_center">
                 <h1>LOGIN</h1>
-                <form class="login_form">
+                <form class="login_form" v-on:submit.prevent="submitLogin">
                     <div class="input_container">
                         <CustomInput label="LOGIN" inputId="user_login"
                         v-model="credentials.username"
@@ -30,10 +40,8 @@
                         <CustomInput label="SENHA" type="password" inputId="pass_login"
                         v-model="credentials.password"
                         />
-                        
-                        
                     </div>
-                    <button type="submit" class="customButton">ENTRAR</button>
+                    <button  type="submit" class="customButton">ENTRAR</button>
                 </form>
             </div>
 
