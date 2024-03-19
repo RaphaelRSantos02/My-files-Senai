@@ -49,7 +49,6 @@ const cardStyle = computed(()=> props.type === 'right' ?
 
 .text-box {
 
-
     .p-fieldset {
         font-size: 1rem;
         color: black;       
@@ -61,6 +60,7 @@ const cardStyle = computed(()=> props.type === 'right' ?
         background-color: rgb(212, 24, 112);
         margin-right: 1200px;
         margin-left: 50px;
+
     }
 }
 
@@ -69,6 +69,7 @@ const cardStyle = computed(()=> props.type === 'right' ?
         background-color: rgb(9, 239, 247);
         margin-left: 1200PX;
         margin-right: 50PX;
+
     }
 }
 </style>

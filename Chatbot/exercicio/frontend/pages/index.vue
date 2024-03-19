@@ -11,7 +11,7 @@
     const includeDialog = ((type)=>{
         if(type === 'Q'){
             dialog.image = 'user.png';
-            dialog.name = 'Raphael';            
+            dialog.name = 'Raphael';
             dialog.type = 'right';
         } else {
             dialog.image = 'bot.png';
@@ -50,16 +50,16 @@ const conversationHistory = ref([])
 
 <template>
     <div>
-        <label for=""> Type here your message!</label> <br>
-        <textarea v-model="dialog.text"/> <br> <br>        
-        <Button @click="sendMessage" label="Send"></Button>
-        <hr>
-        
         <div v-for="(conversation, id) in conversationHistory" :key="id">
             <TextBox :name="conversation.name" :avatarImage="conversation.image" 
                 :message="conversation.text" :type="conversation.type"/>
         </div>
+        <label for=""> Type here your message!</label> <br>
+        <textarea v-model="dialog.text"/> <br> <br>        
+        <Button @click="sendMessage" label="Send"></Button>
+        <hr>
         <div>
+            <h5>Bard: </h5>
             <p> {{ response }} </p>
         </div>
     </div>

@@ -199,11 +199,6 @@ class ChatBotAPIView(APIView):
             trips = Trip.objects.all()
             finalMessage += convertToMessage(trips,'title')
             newAnswer = Conversation(type="A",message=finalMessage if answer.additionalMessage is None else finalMessage + '\n' + answer.additionalMessage ,history=conversationFound)
-
-        elif answer.command == 'DAILY_TRIP':
-            trips = trips.objects.all()
-            finalMessage += convertToMessage(trips,'daily')
-
         else:
             #atualiza o último comando interpretado pela I.A.
             conversationFound.lastCommand = answer.command
