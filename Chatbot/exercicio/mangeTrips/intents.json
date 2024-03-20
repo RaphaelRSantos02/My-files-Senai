@@ -5,7 +5,8 @@
             "patterns": [
                 "Oi",
                 "Olá",
-                "Como vai?"
+                "Como vai?",
+                "ola"
             ],
             "responses": [
                 "Olá, sou o assistente talllll, como posso te ajudar?",
@@ -66,19 +67,15 @@
             "command": "DAILY_TRIP"
         },
         {
-            "tag": "disponibilidade",
+            "tag": "pagamento",
             "patterns": [
-                "Está disponivel?",
-                "disponivel?",
-                "Esta aceitando reserva?",
-                "quando poderei fazer a reserva?",
-                "qual a disponivilidade para reserva?"
+                "qual o pagamento?",
+                "pagamento?"
             ],
             "responses": [
-                "certo, esses são os dias disponiveis: ",
-                "Esta disponivel somente nesses dias:  "
+                "Esse é o estatus: "
             ],            
-            "command": "AVAILABILITY_TRIP"
+            "command": "PAYMENT_TRIP"
         }
         
     ]

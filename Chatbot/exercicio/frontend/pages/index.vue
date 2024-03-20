@@ -18,7 +18,7 @@
             dialog.name = 'Bot';            
             dialog.type = 'left';
         }
-        // faz a cópia profunda da estrutura com os valores atuais (deep copy)
+
         conversationHistory.value.push(
             JSON.parse(JSON.stringify(dialog))
         );                
@@ -27,8 +27,6 @@
     const sendMessage = async () => {
         console.log(dialog.text);
         includeDialog('Q');
-        
-        //message.value;
         const {data: answer} = await useFetch('http://localhost:8000/chatbot/',{
             method: 'POST',
             body:{
@@ -43,7 +41,6 @@
         dialog.text = ''
     }
 
-//armazena em tela o histórico das mensagens
 const conversationHistory = ref([])
 
 </script>
@@ -54,21 +51,18 @@ const conversationHistory = ref([])
             <TextBox :name="conversation.name" :avatarImage="conversation.image" 
                 :message="conversation.text" :type="conversation.type"/>
         </div>
-        <label for=""> Type here your message!</label> <br>
+        <label id="ask" placeholder="Type here your message!" for=""> </label> <br>
         <textarea v-model="dialog.text"/> <br> <br>        
-        <Button @click="sendMessage" label="Send"></Button>
-        <hr>
-        <div>
-            <h5>Bard: </h5>
-            <p> {{ response }} </p>
-        </div>
+        <Button id="button" @click="sendMessage" label="Send"></Button>
+
+        
+
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+.ask()    
+
      
-    /* button{
-        background-color: black;
-        color: white;
-    } */
+
 </style>

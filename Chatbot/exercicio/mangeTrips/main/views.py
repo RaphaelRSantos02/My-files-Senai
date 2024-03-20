@@ -187,7 +187,7 @@ class ChatBotAPIView(APIView):
         finalMessage = answer.message
 
         newAnswer = None
-        if conversationFound.lastCommand == 'SEARCH_TRIP':
+        if conversationFound.lastCommand == 'SEARCH_TRIP' and not answer.command:
             trips = Trip.objects.filter(Q(title__icontains=question) | Q(description__icontains=question) | Q(city__icontains=question))
             if trips.exists():
                 finalMessage = convertToMessage(trips,'title')
@@ -195,10 +195,20 @@ class ChatBotAPIView(APIView):
                 finalMessage = 'Infelizmente não encontramos a viagem que procura =/'
             newAnswer = Conversation(type="A",message=finalMessage,history=conversationFound)
 
-        elif answer.command == 'LIST_TRIPS':
+        elif answer.command == 'LIST_TRIPS' and not answer.command:
             trips = Trip.objects.all()
             finalMessage += convertToMessage(trips,'title')
             newAnswer = Conversation(type="A",message=finalMessage if answer.additionalMessage is None else finalMessage + '\n' + answer.additionalMessage ,history=conversationFound)
+
+        elif answer.command == 'DAILY_TRIP':
+            dailys = Trip.objects.filter(Q(title__icontains= question))
+            finalMessage += convertToMessage(dailys, 'daily')
+            newAnswer = Conversation(type="A",message=finalMessage if answer.additionalMessage is None else finalMessage + '\n' + answer.additionalMessage ,history=conversationFound)
+        
+        elif answer.command == 'PAYMENT_TRIP':
+            payment = Payment.objects.all()
+            finalMessage += convertToMessage(payment, 'status')
+            newAnswer = Conversation(type="A", message=finalMessage if answer.additionalMessage is None else finalMessage + '\n' + answer.additionalMessage ,history=conversationFound)
         else:
             #atualiza o último comando interpretado pela I.A.
             conversationFound.lastCommand = answer.command
