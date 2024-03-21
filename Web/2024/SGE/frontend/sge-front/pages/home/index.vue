@@ -21,17 +21,25 @@ const submiLogOut =  () => {;
 
 <template>
     <div>
-        <button  @click="submiLogOut" class="customButton">SAIR</button>
+        <button  @click="submiLogOut" class="customButton"> <saida> SAIR </saida> </button>
     </div>
 </template>
 
 <style scoped lang="scss">
 
     .customButton{
+        &:hover{
+            color: #92203b;
+        }
+        transition: background 2s ease-in-out;
         margin-top: 50vh;
         margin-left: 30%;
         width: 30vw;
     }
+    saida{
+        color: white
+    }
+    
 
 
 </style>

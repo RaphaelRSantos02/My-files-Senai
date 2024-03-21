@@ -8,12 +8,13 @@
 <style scoped lang="scss">
     .link{
         text-decoration: none;
-        color: black;
+        color: #42D49E;
         margin-left: 50px;
+
     }
     .home{
         margin-left: 0%;
-background-color: aqua;
+        background-color: #343147;
     }
 
 
