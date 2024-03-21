@@ -1,18 +1,39 @@
 <script setup lang="ts">
+definePageMeta({
+    layout: "login"
+});
+    // const {signIn} = useAuth();
+    // const credentials = reactive({
+    //     username: '',
+    //     password: ''
+    // })
+    // const submitLogin = async () => {
+    //     console.log("trying to login with credentials below: ", credentials);
+    //     try{
+    //         await signIn(credentials, {redirect: false} );
+    //         navigateTo('/home')
+    //     } catch(error){
+    //         console.log(error)
+    //     }
+    // }
+
     const {signIn} = useAuth();
     const credentials = reactive({
         username: '',
         password: ''
     })
-    const submitLogin = async () => {
+    const submitLogin =  () => {
         console.log("trying to login with credentials below: ", credentials);
-        try{
-            await signIn(credentials, {redirect: false} );
-            navigateTo('/home')
-        } catch(error){
-            console.log(error)
-        }
-    }
+            signIn(credentials, {redirect: false} ).then(() =>{
+                console.log("successfully logged!!")
+                navigateTo('/home')
+            })
+            .catch((error)=> {
+                console.log(error);
+                alert("Error when trying to login")
+
+        });
+}
 </script>
 
 <template>
