@@ -21,6 +21,7 @@ const submiLogOut =  () => {;
 
 <template>
     <div>
+        <img src="/GEJm3I4WIAAjda9.jpg" alt="melhor imagem" id="hakari">
         <button  @click="submiLogOut" class="customButton"> <saida> SAIR </saida> </button>
     </div>
 </template>
@@ -32,12 +33,16 @@ const submiLogOut =  () => {;
             background-color: var(--felps2-background-color)
         }
         transition: background 2s ease-in-out;
-        margin-top: 50vh;
+        margin-top: 20vh;
         margin-left: 30%;
         width: 30vw;
     }
     saida{
         color: white
+    }
+    #hakari{
+        margin-left: 30vw;
+        margin-top: 10vh;
     }
     
 
