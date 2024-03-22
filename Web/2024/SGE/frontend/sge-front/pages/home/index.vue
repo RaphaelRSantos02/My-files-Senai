@@ -20,10 +20,10 @@ const submiLogOut =  () => {;
 </script>
 
 <template>
-    <div>
+    <main class="">
         <img src="/GEJm3I4WIAAjda9.jpg" alt="melhor imagem" id="hakari">
         <button  @click="submiLogOut" class="customButton"> <saida> SAIR </saida> </button>
-    </div>
+    </main>
 </template>
 
 <style scoped lang="scss">
@@ -34,15 +34,18 @@ const submiLogOut =  () => {;
         }
         transition: background 2s ease-in-out;
         margin-top: 20vh;
-        margin-left: 30%;
+        margin-left: 30vw;
         width: 30vw;
     }
     saida{
         color: white
     }
     #hakari{
-        margin-left: 30vw;
-        margin-top: 10vh;
+            align-items: center;
+            width: 30vw;
+            height: 35vh;
+            margin-top: 10vh;
+            margin-left: 30vw;
     }
     
 
