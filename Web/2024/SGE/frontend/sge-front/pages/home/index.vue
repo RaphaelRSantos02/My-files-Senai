@@ -29,7 +29,7 @@ const submiLogOut =  () => {;
 
     .customButton{
         &:hover{
-            color: #6d182b;
+            color: #531220;
         }
         transition: background 2s ease-in-out;
         margin-top: 50vh;
