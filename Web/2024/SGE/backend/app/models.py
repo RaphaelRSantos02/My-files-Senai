@@ -68,7 +68,7 @@ class Tasks(models.Model):
         return self.title
 
 class TaskAssignees(models.Model):
-    taskFk = models.ForeignKey(Tasks, related_name="Tarefa", on_delete = models.CASCADE)
+    taskFk = models.ForeignKey(Tasks, related_name="Reponsavel_pela_tarefa", on_delete = models.CASCADE)
     assigneeFK = models.ForeignKey(CustomUser, related_name="Responsavel_da_Tarefas", on_delete=models.CASCADE)
 
     def __str__(self):
@@ -82,3 +82,33 @@ class TaskStatus(models.Model):
 
     def __str__(self):
         return self.title
+    
+FILE_TYPE = [
+    ('D', 'Documento'),
+    ('F', 'foto')
+]
+
+class photosTasksStatus(models.Model):
+    taskStatusFk = models.ForeignKey(TaskStatus, related_name="fotos_tarefa", on_delete = models.CASCADE)
+    link = models.CharField(max_length=100000)
+    type = models.CharField(max_length=100, choise = TASK_TYPES)
+    fileType = models.CharField(max_length=100, choise = FILE_TYPE)
+
+    def __str__(self):
+        return self.fileType
+
+class TasksEquipments(models.Model):
+    taskFk = models.ForeignKey(Tasks, related_name="Tarefa_do_equipamento", on_delete = models.CASCADE)
+    equipmentsFK = models.ForeignKey(Equipments, related_name="equipamento_da_tarefa", on_delete = models.CASCADE)
+
+    def __str__(self):
+        return self.equipmentsFK.name
+    
+class EnviorementsAssingnees(models.Model):
+    enviorementsFK = models.ForeignKey(Enviorements, related_name="Responsavel_ambientes_tarefas", on_delete=models.CASCADE)
+    assigneeFK = models.ForeignKey(CustomUser, related_name="Responsavel_do_ambiente", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.enviorementsFK.name
+
+
