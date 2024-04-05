@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
+from .manager import CustomManager
 
 
 BLOCKS = [
@@ -16,20 +17,24 @@ class Environment(models.Model):
     def __str__(self):
         return self.name
 #criando uma classe de usuario customizado para substituir a padrão com atributos desejados    
-class CustomUser(AbstractBaseUser, PermissionsMixin):
+class CustomUser(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField("email address", unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    data_joined = models.DateTimeField(default=timezone.now)
+    date_joined = models.DateTimeField(default=timezone.now)
     registrationNumber = models.CharField(max_length=30)
     phoneNumber = models.CharField(max_length=15, null=True, blank=True)
-    is_email_verified = models.BooleanField(default = False)
-
-    USERNAME_FIELD = "email"
+    is_email_verified = models.BooleanField(default=False)
+    
+    USERNAME_FIELD = "email" #substituir o login username por e-mail
     REQUIRED_FIELDS = []
+
+    objects = CustomManager()
 
     def __str__(self):
         return self.email
+    
+    
 
 class Equipments(models.Model):
     name = models.CharField(max_length= 100)
@@ -60,8 +65,8 @@ class Tasks(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=2000)
     diagnostic = models.CharField(max_length=200, null = True, blank=True)
-    type = models.CharField(max_length=100, choise = TASK_TYPES)
-    status = models.CharField(max_length=30, choise = TASK_STATUS)
+    type = models.CharField(max_length=100, choices = TASK_TYPES)
+    status = models.CharField(max_length=30, choices = TASK_STATUS)
 
     def __str__(self):
         return self.title
@@ -75,7 +80,7 @@ class TaskAssignees(models.Model):
     
 class TaskStatus(models.Model):
     taskFk = models.ForeignKey(Tasks, related_name="Tarefa_status", on_delete = models.CASCADE)
-    status = models.CharField(max_length=100, choise = TASK_STATUS)
+    status = models.CharField(max_length=100, choices = TASK_STATUS)
     creationDate = models.DateTimeField(auto_now_add=True)
     comment = models.CharField(max_length=300)
 
@@ -88,10 +93,10 @@ FILE_TYPE = [
 ]
 
 class photosTasksStatus(models.Model):
-    taskStatusFk = models.ForeignKey(TaskStatus, related_name="fotos_tarefa", on_delete = models.CASCADE)
+    taskStatusFk = models.ForeignKey(TaskStatus, related_name="fotos_tarefa2", on_delete = models.CASCADE)
     link = models.CharField(max_length=100000)
-    type = models.CharField(max_length=100, choise = TASK_TYPES)
-    fileType = models.CharField(max_length=100, choise = FILE_TYPE)
+    type = models.CharField(max_length=100, choices = TASK_TYPES)
+    fileType = models.CharField(max_length=100, choices = FILE_TYPE)
 
     def __str__(self):
         return self.fileType
@@ -219,7 +224,7 @@ WEEK_DAY = [
 
 class TeacherAlocationDetailEnv(models.Model):
     environmentFK = models.ForeignKey(Environment, related_name="AMBIENTE_LOCAL_detalhado", on_delete=models.CASCADE)
-    teacherAlocationDetailFK = models.ForeignKey(TeacherAlocationDetail, related_name="Detalhe_do_ambiente_do_professor_detalhado")
+    teacherAlocationDetailFK = models.ForeignKey(TeacherAlocationDetail, related_name="Detalhe_do_ambiente_do_professor_detalhado", on_delete= models.CASCADE)
     weekDay = models.CharField(max_length=100)
     hourStart = models.TimeField()
     hourEnd = models.TimeField()
@@ -239,7 +244,7 @@ class deadline(models.Model):
 class signatures(models.Model):
     customuserFk = models.ForeignKey(CustomUser, related_name="assinatura_do_usuario", on_delete=models.CASCADE)
     signature = models.CharField(max_length=200)
-    creationDate = models.DateField(auto_now_add=True)
+    createdDate = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.customuserFk.email
@@ -266,7 +271,7 @@ class Plan(models.Model):
 class PlanStatus(models.Model):
     planFK = models.ForeignKey(Plan, related_name="Status_plano", on_delete=models.CASCADE)
     status = models.CharField(max_length=100, choices=STATUS)
-    datetime = models.DateTimeField()
+    createdDate = models.DateTimeField(auto_now_add=True)
     comment = models.CharField(max_length=500)
     file = models.CharField(max_length=10000)
 
