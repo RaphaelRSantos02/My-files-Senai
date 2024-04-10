@@ -32,27 +32,40 @@ class _loginState extends State<login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _name,
-              decoration:InputDecoration(labelText: "Coloque seu nome",
-              border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(40)
+            SizedBox(
+              width: 295,
+              height: 220,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: TextField(
+                      keyboardType: TextInputType.name,
+                      controller: _name,
+                      decoration:InputDecoration(labelText: "Coloque seu nome",
+                      border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(40)
+                              ),
+                            ),
+                              style: const TextStyle(fontSize: 14),
+                           ),
+                  ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: TextField(
+                keyboardType: TextInputType.number,
+                controller: _password,
+                obscureText: true,
+                obscuringCharacter: "*",
+                decoration:InputDecoration(labelText: "Coloque sua senha",
+                border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40)
+                       ),
+                      ),
+                style: const TextStyle(fontSize: 14,),
+              ),
             ),
-          ),
-            style: const TextStyle(fontSize: 14),
-         ),
-            TextField(
-              controller: _password,
-              obscureText: true,
-              obscuringCharacter: "*",
-              decoration:InputDecoration(labelText: "Coloque sua senha",
-              border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(40)
-           ),
-          ),
-              style: const TextStyle(fontSize: 14,),
-            ),
-            Row(
+             Row(
               children: [
                 Expanded(
                   child: 
@@ -86,11 +99,16 @@ class _loginState extends State<login> {
               )
               ],
             ),
+                ]
+                ),
+            ),
+            
+           
             ElevatedButton(
             onPressed: 
             (){
              setState(() {
-               if (_name.text == "admin" && _password.text == "admin" && op == 1){
+               if (_name.text == "admin" && _password.text == "1111" && op == 1){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=> admin(),));
                } 
                else if(_name.text == "raphael" && _password.text == "123" && op == 2){
@@ -98,7 +116,9 @@ class _loginState extends State<login> {
                }
 
                else {
-                  Text("Tente novamente");
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Usuario ou senha errado"), duration: Duration(seconds: 2),)
+                  );
                }
              }); 
             }, child: Text("Entrar")
