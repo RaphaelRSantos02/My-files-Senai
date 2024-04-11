@@ -123,6 +123,9 @@ celerybeat.pid
 .env
 .venv
 env/
+env
+/env
+sge_backend/env
 venv/
 ENV/
 env.bak/
