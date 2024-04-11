@@ -32,9 +32,7 @@ DEBUG = True
 prodution_server = 'sge-backend-production.up.railway.app/'
 
 ALLOWED_HOSTS = [
-    'http://localhost',
-    '127.0.',
-    prodution_server
+    '*'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
