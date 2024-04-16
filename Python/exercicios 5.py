@@ -43,41 +43,41 @@ os.system("cls")
 # #exercicio 2
 # tentativas = 0
 # while tentativas < 3:
-#     inicio_imc = input("deseja saber seu imc? (sim ou não): ")
+#      inicio_imc = input("deseja saber seu imc? (sim ou não): ")
     
-#     if inicio_imc == 'não':
-#         print("você não quis iniciar o programa de imc!!")
-#         break
+#      if inicio_imc == 'não' or inicio_imc == "nao" :
+#          print("você não quis iniciar o programa de imc!!")
+#          break
 
-#     altura = input("Digite sua altura: ")
-#     aux = altura.replace('.', '')
-#     if not aux.isdecimal():
-#         tentativas += 1
-#         print('Insira uma altura valida')
-#         continue 
+#      altura = input("Digite sua altura: ")
+#      aux = altura.replace('.', '')
+#      if not aux.isdecimal():
+#          tentativas += 1
+#          print('Insira uma altura valida')
+#          continue 
 
-#     peso = input("Digite seu peso: ")
-#     aux = peso.replace(".", "")
-#     if not aux.isdecimal():
-#         tentativas += 1
-#         print('Insira um peso valido')
-#         continue 
+#      peso = input("Digite seu peso: ")
+#      aux = peso.replace(".", "")
+#      if not aux.isdecimal():
+#          tentativas += 1
+#          print('Insira um peso valido')
+#          continue 
 
-#     imc = float(peso) / float(altura)**2
+#      imc = float(peso) / float(altura)**2
 
-#     if imc < 18.5:
-#         print("Você está abaixo do peso")
-#     elif (imc >= 18.5 and imc < 25 ):
-#         print("Peso normal")
-#     elif (imc >=25 and imc < 30):
-#         print("pre obesidade")
-#     elif (imc >= 30 and imc < 35):
-#         print("obesidade grau 1")
-#     elif (imc >= 35 and imc < 40):
-#         print("obesidade grau 2")
-#     else:
-#         imc >= 40
-#         print("obesidade mórbida")
+#      if imc < 18.5:
+#          print("Você está abaixo do peso")
+#      elif (imc >= 18.5 and imc < 25 ):
+#          print("Peso normal")
+#      elif (imc >=25 and imc < 30):
+#          print("pre obesidade")
+#      elif (imc >= 30 and imc < 35):
+#          print("obesidade grau 1")
+#      elif (imc >= 35 and imc < 40):
+#          print("obesidade grau 2")
+#      else:
+#          imc >= 40
+#          print("obesidade mórbida")
 
 # #Exercicio 3
 # tentativas = 0
