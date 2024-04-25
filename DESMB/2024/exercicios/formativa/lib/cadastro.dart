@@ -16,18 +16,17 @@ class _CadastroState extends State<Cadastro> {
   String url = "http://10.109.83.7:3000/usuarios";
 
   _post(){
-    Map<String, dynamic>mensagem = {
-      "email":"${_email.text}",
-      "senha":"${_password.text}"
-    };
     http.post(
       Uri.parse(url),
       headers: <String, String>{
         'Content-type':'application/json; charset=UTF-8'
       },
-      body: jsonEncode(mensagem),
+      body: jsonEncode(<String, String>{'email': _email.text, 'senha':_password.text}),
     );
   }
+
+    
+    
 
   @override
   Widget build(BuildContext context) {
@@ -88,13 +87,17 @@ class _CadastroState extends State<Cadastro> {
                    
                     
                   }, child: Text("cadastre-se")),
-                  ElevatedButton(onPressed: (){}, child: Text("Deletar"))
+                  ElevatedButton(onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> Home(),));
+
+
+                  }, child: Text("Deletar"))
                 ]
                 ),
             ),
           ],
         ),
       ),
-    );;
+    );
   }
 }

@@ -9,6 +9,24 @@
       "id": "93bf",
       "email": "murilo@hotmail.com",
       "senha": "4324523"
+    },
+    {
+      "id": "ef1c",
+      "email": "vitor@hotmail.com",
+      "senha": "2222"
+    },
+    {
+      "id": "b4b4",
+      "email": "aaa@aaa.com",
+      "senha": "111"
+    }
+  ],
+  "produtos": [
+    {
+      "id": "424b",
+      "email": "Arroz",
+      "valor": "10",
+      "qtde": "2"
     }
   ]
 }

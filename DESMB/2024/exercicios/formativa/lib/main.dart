@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formativa/cadastro.dart';
+import 'package:formativa/produtos.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -21,19 +22,24 @@ class _HomeState extends State<Home> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   String url = "http://10.109.83.7:3000/usuarios";
-  List dado=[];
-  var usuarios = <Usuarios>[];
 
-  _getusuario()async{
-    http.Response resposta = await http.get(Uri.parse(url));
-    dado = json.decode(resposta.body);
-    for(int i =0; i<dado.length; i++)
-    {
-      print(dado[i]);
+
+  Future<void> _getusuario() async {
+    final String email = _email.text;
+    final String password = _password.text;
+
+    final response = await http.get(Uri.parse(url));
+    final List<dynamic> usuarios = jsonDecode(response.body);
+
+    for (var usuario in usuarios) {
+      if (usuario['email'] == email && usuario['senha'] == password) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Login com sucesso')));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => produtos(),));
+
+        return ;
+      }
     }
-    setState(() {
-      usuarios = dado.map((json) => Usuarios.fromJson(json)).toList();
-    });
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Email/Senha estão incorretos')));
   }
 
   @override
@@ -104,15 +110,5 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
-  }
-}
-
-class Usuarios{
-  String id;
-  String email;
-  String senha;
-  Usuarios(this.id, this.email, this.senha);
-  factory Usuarios.fromJson(Map<String, dynamic>json){
-    return Usuarios(json["id"], json["email"], json["senha"]);
   }
 }
