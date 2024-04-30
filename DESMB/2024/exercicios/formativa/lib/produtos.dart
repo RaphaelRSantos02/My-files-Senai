@@ -17,29 +17,14 @@ class _produtosState extends State<produtos> {
 
   String url = "http://10.109.83.7:3000/produtos";
 
-  void post(nome,  valor, qtde, context) async{
-    http.Response resposta = await http.post(
+  _post(){
+    http.post(
       Uri.parse(url),
-      headers: {
+      headers: <String, String>{
         'Content-type':'application/json; charset=UTF-8'
       },
-      body: jsonEncode({'email': _nome.text, 'valor':_valor.text, 'qtde': _qtde.text}),
+      body: jsonEncode(<String, String>{'email': _nome.text, 'valor':_valor.text, 'qtde': _qtde.text}),
     );
-
-    if(res.statusCode == 201) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content:Text("Produto adicionado com sucesso")
-        )
-      );
-    }
-    else {
-      ScaffoldMessenger.of(context). showSnackBar(
-        const SnackBar(
-          content: text("Ocorreu um Erro")
-        )
-      );
-    }
   }
 
   @override
@@ -105,7 +90,7 @@ class _produtosState extends State<produtos> {
                     ),
                   ),
                   
-                  ElevatedButton(onPressed: () => post(_nome, _valor, _qtde, context), child: Text("Cadastrar produto")),
+                  ElevatedButton(onPressed: _post(), child: Text("Cadastrar produto")),
                   ElevatedButton(onPressed: (){
                     setState(() {
                        Navigator.push(context, MaterialPageRoute(builder: (context)=> mercado(),));
