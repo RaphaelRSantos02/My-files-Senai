@@ -22,6 +22,7 @@ class _HomeState extends State<Home> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   String url = "http://10.109.83.7:3000/usuarios";
+  bool exibir = false;
 
 
   Future<void> _getusuario() async {
@@ -91,7 +92,12 @@ class _HomeState extends State<Home> {
                         Icons.password,
                         color: Colors.blue,
                         size: 30.0,
-                      )
+                      ),
+                      suffixIcon: IconButton(icon: Icon(exibir ? Icons.visibility : Icons.visibility_off), onPressed: (){
+                        setState(() {
+                          exibir = !exibir;
+                        });
+                      },)
                       ),
                     ),
                   ),
