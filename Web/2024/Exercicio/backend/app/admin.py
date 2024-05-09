@@ -44,3 +44,10 @@ class AdminVendasProdutos(admin.ModelAdmin):
 admin.site.register(VendasProdutos,AdminVendasProdutos)
 
 
+class AdminFoto(admin.ModelAdmin):
+    list_display = ['id']
+    list_display_links = ('id',)
+    search_fields = ('id',)
+    list_per_page = 10
+    
+admin.site.register(Foto,AdminFoto)

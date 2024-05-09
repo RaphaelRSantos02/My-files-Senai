@@ -22,18 +22,33 @@ class UsuarioCustomizado(AbstractBaseUser,PermissionsMixin):
 class CategoriaProdutos(models.Model):
     nome = models.CharField(max_length=150)
 
-    def __strl__(self):
+    def __str__(self):
         return self.nome
 
+
+class Foto(models.Model):
+    url = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.url
 
 class Produtos(models.Model):
     categoriaFK = models.ForeignKey(CategoriaProdutos, related_name='categoriaProdutos', on_delete=models.CASCADE)
     nome = models.CharField(max_length=150)
     preco = models.DecimalField(max_digits=5, decimal_places=2)
     quantidade = models.IntegerField()
+    fotos = models.ManyToManyField(Foto)
 
-    def __strl__(self):
+    def __str__(self):
         return self.nome
+
+#relacionamento em tabela separada
+# class Foto(models.Model):
+#     produtoFK = models.ForeignKey(Produtos, related_name='fotoProdutos', on_delete=models.CASCADE)
+#     url = models.CharField(max_length=1000)
+
+#     def __str__(self):
+#         return self.url
 
 
 STATUS_PAGAMENTOS = [
@@ -49,7 +64,7 @@ class Vendas(models.Model):
     dataHora = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=STATUS_PAGAMENTOS)
 
-    def __strl__(self):
+    def __str__(self):
             return self.status
 
 class VendasProdutos(models.Model):
@@ -57,5 +72,5 @@ class VendasProdutos(models.Model):
      quantidade = models.IntegerField()
      vendaFK = models.ForeignKey(Vendas, related_name='vendasFK', on_delete=models.CASCADE)
 
-     def __strl__(self):
+     def __str__(self):
             return self.produtoFK.nome

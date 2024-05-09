@@ -6,11 +6,12 @@ export default defineNuxtConfig({
   },
   modules: [
     'nuxt-primevue',
-    '@sidebase/nuxt-auth'
+    '@sidebase/nuxt-auth',
+    '@pinia/nuxt'
   ],
   primevue: {
     components: {
-      include: ['Button', 'Avatar', 'InputText', 'FloatLabel']
+      include: ['Button', 'Avatar', 'InputText', 'FloatLabel', 'Menubar']
     }
   },
   css: [

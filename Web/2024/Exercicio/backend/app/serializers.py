@@ -4,7 +4,7 @@ from .models import *
 class UsuarioCustomizadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = UsuarioCustomizado
-        fields = '__all__'
+        fields = ['id','email','telefone','cpf','endereco',]
         many = True
 
 class CategoriaProdutosSerializer(serializers.ModelSerializer):
@@ -13,7 +13,20 @@ class CategoriaProdutosSerializer(serializers.ModelSerializer):
         fields = '__all__'
         many = True
 
+class FotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        models = Foto
+        fields = '__all__'
+        many = True
+
 class ProdutosSerializer(serializers.ModelSerializer):
+    #fotos = FotoSerializer(read_only=True) #fazer o join com tabelas separadas
+    fotos = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='url'
+    ) #join com many to many field
+    categoriaFK = CategoriaProdutosSerializer(read_only=True)
     class Meta:
         model = Produtos
         fields = '__all__'
@@ -21,6 +34,7 @@ class ProdutosSerializer(serializers.ModelSerializer):
 
 
 class VendasSerializer(serializers.ModelSerializer):
+    usuarioFK = UsuarioCustomizadoSerializer(read_only=True)
     class Meta:
         model = Vendas
         fields = '__all__'

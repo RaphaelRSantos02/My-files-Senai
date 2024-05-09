@@ -3,10 +3,12 @@
 </script>
 
 <template>
-    <Header/>
-    <slot/>
+    <div class="default-layout">
+        <Header/>
+        <slot/>
+    </div>
 </template>
 
 <style scoped lang="scss">
-
+    
 </style>
