@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-s3q(weedq-_d37=4qk2tzf(7!-+ksly2-*m_#$y4=f)wyh!j-x'
+SECRET_KEY = 'django-insecure-f!de7q#8((0+=mv)mul7bf7&m09$r4nai^3ymbthiz#j#w4y61'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'app'
 ]
 
-AUTH_USER_MODEL = 'app.CustomUser'
+AUTH_USER_MODEL = 'app.UsuarioCustomizado'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -137,5 +137,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny'
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE' : 30,
+    'PAGE_SIZE': 30,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ] 
 }

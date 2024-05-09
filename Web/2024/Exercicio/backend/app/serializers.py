@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from .models import *
 
-class CustomUserSerializer(serializers.ModelSerializer):
+class UsuarioCustomizadoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser
+        model = UsuarioCustomizado
         fields = '__all__'
         many = True
 
@@ -32,3 +32,4 @@ class VendaProdutosSerializer(serializers.ModelSerializer):
         model = VendasProdutos
         fields = '__all__'
         many = True
+
