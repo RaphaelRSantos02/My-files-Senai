@@ -34,7 +34,7 @@ const fazerLogin = () => {
 <template>
     <main class="login-main flex align-items-center justify-content-center">
         <section class="login-container flex flex-column align-items-center justify-content-center">
-            <h4 class="row-login">Adega Santo Antônio</h4>
+            <h4 class="row-login">Adega do Alemão</h4>
             <div class="row-login">
                 <FloatLabel>
                     <InputText v-model="credenciais.email" type="email" id="email-input" class="input-text" />
