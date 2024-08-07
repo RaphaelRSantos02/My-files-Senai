@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const Tela1());
+  runApp(MaterialApp(
+    home: Tela1(),
+  ));
 }
 
 class Tela1 extends StatelessWidget {
@@ -31,4 +33,4 @@ class Tela1 extends StatelessWidget {
       ],),
     );
   }
-}
+} 
