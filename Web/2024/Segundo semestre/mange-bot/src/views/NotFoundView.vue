@@ -1,6 +1,6 @@
 <template>
     <main>
         <h1>pagina não encontrada</h1>
-        <img src="@/assets/images/erro-404.webp" alt="">
+        <img src="/erro-404.png" alt="">
     </main>
 </template>
