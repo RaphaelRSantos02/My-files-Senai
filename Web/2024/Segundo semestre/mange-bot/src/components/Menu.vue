@@ -1,4 +1,21 @@
 <script setup lang="ts">
+import { changeLanguage, type AvailableLanguages, i18nApplication } from '@/I18n/i18n';
+import { computed, type Ref, ref } from 'vue'
+
+const currentLanguage: Ref<AvailableLanguages> =
+    ref(i18nApplication.global.locale.value);
+
+const change = () => {
+    if (currentLanguage.value == 'br'){
+        changeLanguage('en');
+    }
+    else{
+        changeLanguage('br');
+    }
+    currentLanguage.value = i18nApplication.global.locale.value;
+}
+
+const flag = computed(()=>currentLanguage.value == 'br'? 'en.png' : 'br.jpg');
 
 </script>
 
@@ -9,6 +26,7 @@
             <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/buildView"> Build </RouterLink>
             <RouterLink to="cartView"> Carrinho </RouterLink>
+            <img id="flag" :src="flag" @click="change">
         </nav>
     </header>
 

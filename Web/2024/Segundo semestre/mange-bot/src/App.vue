@@ -3,6 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import Robot from './components/Robot.vue'
 import Menu from './components/Menu.vue';
 
+
 </script>
 
 <template>
@@ -13,9 +14,9 @@ import Menu from './components/Menu.vue';
         </div>
         <footer class="flex flex-row align-items-end justify-content-end">
             <div class="footer-Robot flex flex-row justify-content-evenly">
-                <Robot img="bot0.png" text="Crie Seu robô com o máximo de tecnologia!"/>
-                <Robot img="bot1.png" text="A plataforma mais amada do Brasil!"/>
-                <Robot img="bot2.png" text="Atendimento online 24hrs!"/>
+                <Robot img="bot0.png" :text="$t('FOOTER.TECHNOLOGY')"/>
+                <Robot img="bot1.png" :text="$t('FOOTER.PLATFORM')"/>
+                <Robot img="bot2.png" :text="$t('FOOTER.SUPPORT')"/>
             </div>
             <img class="circle" src="/icon2.png" alt="">
         </footer>
