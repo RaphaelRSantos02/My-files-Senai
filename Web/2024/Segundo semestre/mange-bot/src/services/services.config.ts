@@ -1,8 +1,9 @@
 import axios, { type AxiosResponse } from "axios";
+export const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
 export const getAxios = ()=> {
     const createdAxios = axios.create({
-        baseURL: "https://mange-make-bot.azurewebsites.net/api",
+        baseURL: "/proxy-api/api",
         timeout: 40000, //40segundos
         headers: {
             "Content-Type": "application/json",
