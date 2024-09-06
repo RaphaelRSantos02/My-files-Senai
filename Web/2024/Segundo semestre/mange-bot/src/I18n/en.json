@@ -7,5 +7,14 @@
         "TECHNOLOGY": "Create your robot with maximum technology!",
         "PLATFORM": "The most loved platform from Brazil!",
         "SUPPORT": "Online support for 24hrs!"
+    },
+    "MENU":{
+        "HOME": "Home",
+        "BUILD": "Build",
+        "CART": "Cart"
+    },
+    "BUILD":{
+        "TITLE": "Customize your Robot!",
+        "ADD_CART": "Add in Cart"
     }
 }
