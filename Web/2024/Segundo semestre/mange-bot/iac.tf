@@ -15,25 +15,33 @@ provider "azurerm" {
     } 
 }
 
-resource "azurerm_resource_group" "raphael-robot-t5-group" {
-  name = "raphael-robot-t5-group"
+resource "azurerm_resource_group" "raphael-robot-t6-group" {
+  name = "raphael-robot-t6-group"
   location = "Brazil South"
 }
 
-resource "azurerm_service_plan" "raphael-robot-t5-sp" {
-  name = "raphael-robot-t5-sp"
-  resource_group_name = azurerm_resource_group.raphael-robot-t5-group.name
-  location = azurerm_resource_group.raphael-robot-t5-group.location
+resource "azurerm_service_plan" "raphael-robot-t6-sp" {
+  name = "raphael-robot-t6-sp"
+  resource_group_name = azurerm_resource_group.raphael-robot-t6-group.name
+  location = azurerm_resource_group.raphael-robot-t6-group.location
   sku_name = "S1"
   os_type = "Windows"
 }
 
-resource "azurerm_windows_web_app" "raphael-robot-t5-app" {
-    name = "raphael-robot-t5-app"
-    resource_group_name = azurerm_resource_group.raphael-robot-t5-group.name
-    location = azurerm_resource_group.raphael-robot-t5-group.location
-    service_plan_id = azurerm_service_plan.raphael-robot-t5-sp.id
+resource "azurerm_windows_web_app" "raphael-robot-t6-app" {
+    name = "raphael-robot-t6-app"
+    resource_group_name = azurerm_resource_group.raphael-robot-t6-group.name
+    location = azurerm_resource_group.raphael-robot-t6-group.location
+    service_plan_id = azurerm_service_plan.raphael-robot-t6-sp.id
     site_config {
       always_on = false
     }
+}
+
+resource "azurerm_windows_web_app_slot" "raphael-robot-t6-app-QA" {
+  name = "raphael-robot-t6-app-QA"
+  app_service_id = azurerm_windows_web_app.raphael-robot-t6-app.id
+  site_config {
+    
+  }
 }
